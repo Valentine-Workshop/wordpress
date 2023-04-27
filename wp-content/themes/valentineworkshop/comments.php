@@ -21,7 +21,7 @@ if ( post_password_required() ) {
 	return;
 }
 
-$twenty_twenty_one_comment_count = get_comments_number();
+$vw_comment_count = get_comments_number();
 ?>
 
 <div id="comments" class="comments-area default-max-width <?php echo get_option( 'show_avatars' ) ? 'show-avatars' : ''; ?>">
@@ -30,14 +30,14 @@ $twenty_twenty_one_comment_count = get_comments_number();
 	if ( have_comments() ) :
 		?>
 		<h2 class="comments-title">
-			<?php if ( '1' === $twenty_twenty_one_comment_count ) : ?>
+			<?php if ( '1' === $vw_comment_count ) : ?>
 				<?php esc_html_e( '1 comment', 'twentytwentyone' ); ?>
 			<?php else : ?>
 				<?php
 				printf(
 					/* translators: %s: Comment count number. */
-					esc_html( _nx( '%s comment', '%s comments', $twenty_twenty_one_comment_count, 'Comments title', 'twentytwentyone' ) ),
-					esc_html( number_format_i18n( $twenty_twenty_one_comment_count ) )
+					esc_html( _nx( '%s comment', '%s comments', $vw_comment_count, 'Comments title', 'twentytwentyone' ) ),
+					esc_html( number_format_i18n( $vw_comment_count ) )
 				);
 				?>
 			<?php endif; ?>
@@ -62,13 +62,13 @@ $twenty_twenty_one_comment_count = get_comments_number();
 				'mid_size'           => 0,
 				'prev_text'          => sprintf(
 					'%s <span class="nav-prev-text">%s</span>',
-					is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' ),
+					is_rtl() ? vw_get_icon_svg( 'ui', 'arrow_right' ) : vw_get_icon_svg( 'ui', 'arrow_left' ),
 					esc_html__( 'Older comments', 'twentytwentyone' )
 				),
 				'next_text'          => sprintf(
 					'<span class="nav-next-text">%s</span> %s',
 					esc_html__( 'Newer comments', 'twentytwentyone' ),
-					is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' )
+					is_rtl() ? vw_get_icon_svg( 'ui', 'arrow_left' ) : vw_get_icon_svg( 'ui', 'arrow_right' )
 				),
 			)
 		);

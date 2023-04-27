@@ -12,13 +12,13 @@
 /**
  * Function to return the array of starter content for the theme.
  *
- * Passes it through the `twenty_twenty_one_starter_content` filter before returning.
+ * Passes it through the `vw_starter_content` filter before returning.
  *
  * @since Twenty Twenty-One 1.0
  *
  * @return array A filtered array of args for the starter_content.
  */
-function twenty_twenty_one_get_starter_content() {
+function vw_get_starter_content() {
 
 	// Define and register starter content to showcase the theme on new sites.
 	$starter_content = array(
@@ -180,5 +180,5 @@ function twenty_twenty_one_get_starter_content() {
 	 *
 	 * @param array $starter_content Array of starter content.
 	 */
-	return apply_filters( 'twenty_twenty_one_starter_content', $starter_content );
+	return apply_filters( 'vw_starter_content', $starter_content );
 }

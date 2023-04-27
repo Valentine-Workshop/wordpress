@@ -7,7 +7,7 @@
  * @since Twenty Twenty-One 1.0
  */
 
-if ( ! function_exists( 'twenty_twenty_one_posted_on' ) ) {
+if ( ! function_exists( 'vw_posted_on' ) ) {
 	/**
 	 * Prints HTML with meta information for the current post-date/time.
 	 *
@@ -15,7 +15,7 @@ if ( ! function_exists( 'twenty_twenty_one_posted_on' ) ) {
 	 *
 	 * @return void
 	 */
-	function twenty_twenty_one_posted_on() {
+	function vw_posted_on() {
 		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
 
 		$time_string = sprintf(
@@ -33,7 +33,7 @@ if ( ! function_exists( 'twenty_twenty_one_posted_on' ) ) {
 	}
 }
 
-if ( ! function_exists( 'twenty_twenty_one_posted_by' ) ) {
+if ( ! function_exists( 'vw_posted_by' ) ) {
 	/**
 	 * Prints HTML with meta information about theme author.
 	 *
@@ -41,7 +41,7 @@ if ( ! function_exists( 'twenty_twenty_one_posted_by' ) ) {
 	 *
 	 * @return void
 	 */
-	function twenty_twenty_one_posted_by() {
+	function vw_posted_by() {
 		if ( ! get_the_author_meta( 'description' ) && post_type_supports( get_post_type(), 'author' ) ) {
 			echo '<span class="byline">';
 			printf(
@@ -54,7 +54,7 @@ if ( ! function_exists( 'twenty_twenty_one_posted_by' ) ) {
 	}
 }
 
-if ( ! function_exists( 'twenty_twenty_one_entry_meta_footer' ) ) {
+if ( ! function_exists( 'vw_entry_meta_footer' ) ) {
 	/**
 	 * Prints HTML with meta information for the categories, tags and comments.
 	 * Footer entry meta is displayed differently in archives and single posts.
@@ -63,7 +63,7 @@ if ( ! function_exists( 'twenty_twenty_one_entry_meta_footer' ) ) {
 	 *
 	 * @return void
 	 */
-	function twenty_twenty_one_entry_meta_footer() {
+	function vw_entry_meta_footer() {
 
 		// Early exit if not a post.
 		if ( 'post' !== get_post_type() ) {
@@ -79,11 +79,11 @@ if ( ! function_exists( 'twenty_twenty_one_entry_meta_footer' ) ) {
 
 			$post_format = get_post_format();
 			if ( 'aside' === $post_format || 'status' === $post_format ) {
-				echo '<p><a href="' . esc_url( get_permalink() ) . '">' . twenty_twenty_one_continue_reading_text() . '</a></p>'; // phpcs:ignore WordPress.Security.EscapeOutput
+				echo '<p><a href="' . esc_url( get_permalink() ) . '">' . vw_continue_reading_text() . '</a></p>'; // phpcs:ignore WordPress.Security.EscapeOutput
 			}
 
 			// Posted on.
-			twenty_twenty_one_posted_on();
+			vw_posted_on();
 
 			// Edit post link.
 			edit_post_link(
@@ -123,9 +123,9 @@ if ( ! function_exists( 'twenty_twenty_one_entry_meta_footer' ) ) {
 
 			echo '<div class="posted-by">';
 			// Posted on.
-			twenty_twenty_one_posted_on();
+			vw_posted_on();
 			// Posted by.
-			twenty_twenty_one_posted_by();
+			vw_posted_by();
 			// Edit post link.
 			edit_post_link(
 				sprintf(
@@ -165,7 +165,7 @@ if ( ! function_exists( 'twenty_twenty_one_entry_meta_footer' ) ) {
 	}
 }
 
-if ( ! function_exists( 'twenty_twenty_one_post_thumbnail' ) ) {
+if ( ! function_exists( 'vw_post_thumbnail' ) ) {
 	/**
 	 * Displays an optional post thumbnail.
 	 *
@@ -176,8 +176,8 @@ if ( ! function_exists( 'twenty_twenty_one_post_thumbnail' ) ) {
 	 *
 	 * @return void
 	 */
-	function twenty_twenty_one_post_thumbnail() {
-		if ( ! twenty_twenty_one_can_show_post_thumbnail() ) {
+	function vw_post_thumbnail() {
+		if ( ! vw_can_show_post_thumbnail() ) {
 			return;
 		}
 		?>
@@ -210,7 +210,7 @@ if ( ! function_exists( 'twenty_twenty_one_post_thumbnail' ) ) {
 	}
 }
 
-if ( ! function_exists( 'twenty_twenty_one_the_posts_navigation' ) ) {
+if ( ! function_exists( 'vw_the_posts_navigation' ) ) {
 	/**
 	 * Print the next and previous posts navigation.
 	 *
@@ -218,14 +218,14 @@ if ( ! function_exists( 'twenty_twenty_one_the_posts_navigation' ) ) {
 	 *
 	 * @return void
 	 */
-	function twenty_twenty_one_the_posts_navigation() {
+	function vw_the_posts_navigation() {
 		the_posts_pagination(
 			array(
 				'before_page_number' => esc_html__( 'Page', 'twentytwentyone' ) . ' ',
 				'mid_size'           => 0,
 				'prev_text'          => sprintf(
 					'%s <span class="nav-prev-text">%s</span>',
-					is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' ),
+					is_rtl() ? vw_get_icon_svg( 'ui', 'arrow_right' ) : vw_get_icon_svg( 'ui', 'arrow_left' ),
 					wp_kses(
 						__( 'Newer <span class="nav-short">posts</span>', 'twentytwentyone' ),
 						array(
@@ -245,7 +245,7 @@ if ( ! function_exists( 'twenty_twenty_one_the_posts_navigation' ) ) {
 							),
 						)
 					),
-					is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' )
+					is_rtl() ? vw_get_icon_svg( 'ui', 'arrow_left' ) : vw_get_icon_svg( 'ui', 'arrow_right' )
 				),
 			)
 		);

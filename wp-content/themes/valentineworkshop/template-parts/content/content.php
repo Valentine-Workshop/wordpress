@@ -13,19 +13,20 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
+		<h1>Content page</h1>
 		<?php if ( is_singular() ) : ?>
 			<?php the_title( '<h1 class="entry-title default-max-width">', '</h1>' ); ?>
 		<?php else : ?>
 			<?php the_title( sprintf( '<h2 class="entry-title default-max-width"><a href="%s">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 		<?php endif; ?>
 
-		<?php twenty_twenty_one_post_thumbnail(); ?>
+		<?php vw_post_thumbnail(); ?>
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
 		<?php
 		the_content(
-			twenty_twenty_one_continue_reading_text()
+			vw_continue_reading_text()
 		);
 
 		wp_link_pages(
@@ -41,6 +42,6 @@
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer default-max-width">
-		<?php twenty_twenty_one_entry_meta_footer(); ?>
+		<?php vw_entry_meta_footer(); ?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

@@ -28,7 +28,7 @@ while ( have_posts() ) {
 				 *
 				 * @param string $image_size Image size. Default 'full'.
 				 */
-				$image_size = apply_filters( 'twenty_twenty_one_attachment_size', 'full' );
+				$image_size = apply_filters( 'vw_attachment_size', 'full' );
 				echo wp_get_attachment_image( get_the_ID(), $image_size );
 				?>
 

@@ -18,13 +18,13 @@ if ( function_exists( 'register_block_pattern_category' ) ) {
 	 *
 	 * @return void
 	 */
-	function twenty_twenty_one_register_block_pattern_category() {
+	function vw_register_block_pattern_category() {
 		register_block_pattern_category(
 			'twentytwentyone',
 			array( 'label' => esc_html__( 'Twenty Twenty-One', 'twentytwentyone' ) )
 		);
 	}
-	add_action( 'init', 'twenty_twenty_one_register_block_pattern_category' );
+	add_action( 'init', 'vw_register_block_pattern_category' );
 }
 
 /**
@@ -38,7 +38,7 @@ if ( function_exists( 'register_block_pattern' ) ) {
 	 *
 	 * @return void
 	 */
-	function twenty_twenty_one_register_block_pattern() {
+	function vw_register_block_pattern() {
 
 		// Large Text.
 		register_block_pattern(
@@ -133,5 +133,5 @@ if ( function_exists( 'register_block_pattern' ) ) {
 		);
 
 	}
-	add_action( 'init', 'twenty_twenty_one_register_block_pattern' );
+	add_action( 'init', 'vw_register_block_pattern' );
 }

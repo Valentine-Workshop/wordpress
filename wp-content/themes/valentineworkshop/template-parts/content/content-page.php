@@ -12,15 +12,15 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
+<h1>Pages</h1>
 	<?php if ( ! is_front_page() ) : ?>
 		<header class="entry-header alignwide">
 			<?php get_template_part( 'template-parts/header/entry-header' ); ?>
-			<?php twenty_twenty_one_post_thumbnail(); ?>
+			<?php vw_post_thumbnail(); ?>
 		</header><!-- .entry-header -->
 	<?php elseif ( has_post_thumbnail() ) : ?>
 		<header class="entry-header alignwide">
-			<?php twenty_twenty_one_post_thumbnail(); ?>
+			<?php vw_post_thumbnail(); ?>
 		</header><!-- .entry-header -->
 	<?php endif; ?>
 
