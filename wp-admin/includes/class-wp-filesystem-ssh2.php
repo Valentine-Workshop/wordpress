@@ -496,27 +496,20 @@ class WP_Filesystem_SSH2 extends WP_Filesystem_Base {
 	}
 
 	/**
-	 * Moves a file or directory.
-	 *
-	 * After moving files or directories, OPcache will need to be invalidated.
-	 *
-	 * If moving a directory fails, `copy_dir()` can be used for a recursive copy.
-	 *
-	 * Use `move_dir()` for moving directories with OPcache invalidation and a
-	 * fallback to `copy_dir()`.
+	 * Moves a file.
 	 *
 	 * @since 2.7.0
 	 *
-	 * @param string $source      Path to the source file or directory.
-	 * @param string $destination Path to the destination file or directory.
-	 * @param bool   $overwrite   Optional. Whether to overwrite the destination if it exists.
+	 * @param string $source      Path to the source file.
+	 * @param string $destination Path to the destination file.
+	 * @param bool   $overwrite   Optional. Whether to overwrite the destination file if it exists.
 	 *                            Default false.
 	 * @return bool True on success, false on failure.
 	 */
 	public function move( $source, $destination, $overwrite = false ) {
 		if ( $this->exists( $destination ) ) {
 			if ( $overwrite ) {
-				// We need to remove the destination before we can rename the source.
+				// We need to remove the destination file before we can rename the source.
 				$this->delete( $destination, false, 'f' );
 			} else {
 				// If we're not overwriting, the rename will fail, so return early.
@@ -564,11 +557,11 @@ class WP_Filesystem_SSH2 extends WP_Filesystem_Base {
 	 *
 	 * @since 2.7.0
 	 *
-	 * @param string $path Path to file or directory.
-	 * @return bool Whether $path exists or not.
+	 * @param string $file Path to file or directory.
+	 * @return bool Whether $file exists or not.
 	 */
-	public function exists( $path ) {
-		return file_exists( $this->sftp_path( $path ) );
+	public function exists( $file ) {
+		return file_exists( $this->sftp_path( $file ) );
 	}
 
 	/**
@@ -612,10 +605,10 @@ class WP_Filesystem_SSH2 extends WP_Filesystem_Base {
 	 *
 	 * @since 2.7.0
 	 *
-	 * @param string $path Path to file or directory.
-	 * @return bool Whether $path is writable.
+	 * @param string $file Path to file or directory.
+	 * @return bool Whether $file is writable.
 	 */
-	public function is_writable( $path ) {
+	public function is_writable( $file ) {
 		// PHP will base its writable checks on system_user === file_owner, not ssh_user === file_owner.
 		return true;
 	}
@@ -774,8 +767,6 @@ class WP_Filesystem_SSH2 extends WP_Filesystem_Base {
 			return false;
 		}
 
-		$path = trailingslashit( $path );
-
 		while ( false !== ( $entry = $dir->read() ) ) {
 			$struc         = array();
 			$struc['name'] = $entry;
@@ -792,20 +783,20 @@ class WP_Filesystem_SSH2 extends WP_Filesystem_Base {
 				continue;
 			}
 
-			$struc['perms']       = $this->gethchmod( $path . $entry );
+			$struc['perms']       = $this->gethchmod( $path . '/' . $entry );
 			$struc['permsn']      = $this->getnumchmodfromh( $struc['perms'] );
 			$struc['number']      = false;
-			$struc['owner']       = $this->owner( $path . $entry );
-			$struc['group']       = $this->group( $path . $entry );
-			$struc['size']        = $this->size( $path . $entry );
-			$struc['lastmodunix'] = $this->mtime( $path . $entry );
+			$struc['owner']       = $this->owner( $path . '/' . $entry );
+			$struc['group']       = $this->group( $path . '/' . $entry );
+			$struc['size']        = $this->size( $path . '/' . $entry );
+			$struc['lastmodunix'] = $this->mtime( $path . '/' . $entry );
 			$struc['lastmod']     = gmdate( 'M j', $struc['lastmodunix'] );
 			$struc['time']        = gmdate( 'h:i:s', $struc['lastmodunix'] );
-			$struc['type']        = $this->is_dir( $path . $entry ) ? 'd' : 'f';
+			$struc['type']        = $this->is_dir( $path . '/' . $entry ) ? 'd' : 'f';
 
 			if ( 'd' === $struc['type'] ) {
 				if ( $recursive ) {
-					$struc['files'] = $this->dirlist( $path . $struc['name'], $include_hidden, $recursive );
+					$struc['files'] = $this->dirlist( $path . '/' . $struc['name'], $include_hidden, $recursive );
 				} else {
 					$struc['files'] = array();
 				}

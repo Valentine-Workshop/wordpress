@@ -11,6 +11,7 @@
  * Core class used to implement displaying themes in a list table for the network admin.
  *
  * @since 3.1.0
+ * @access private
  *
  * @see WP_List_Table
  */
@@ -443,15 +444,16 @@ class WP_MS_Themes_List_Table extends WP_List_Table {
 			}
 
 			if ( 'search' !== $type ) {
-				$status_links[ $type ] = array(
-					'url'     => esc_url( add_query_arg( 'theme_status', $type, $url ) ),
-					'label'   => sprintf( $text, number_format_i18n( $count ) ),
-					'current' => $type === $status,
+				$status_links[ $type ] = sprintf(
+					"<a href='%s'%s>%s</a>",
+					esc_url( add_query_arg( 'theme_status', $type, $url ) ),
+					( $type === $status ) ? ' class="current" aria-current="page"' : '',
+					sprintf( $text, number_format_i18n( $count ) )
 				);
 			}
 		}
 
-		return $this->get_views_links( $status_links );
+		return $status_links;
 	}
 
 	/**
@@ -513,15 +515,7 @@ class WP_MS_Themes_List_Table extends WP_List_Table {
 		$checkbox_id = 'checkbox_' . md5( $theme->get( 'Name' ) );
 		?>
 		<input type="checkbox" name="checked[]" value="<?php echo esc_attr( $theme->get_stylesheet() ); ?>" id="<?php echo $checkbox_id; ?>" />
-		<label class="screen-reader-text" for="<?php echo $checkbox_id; ?>" >
-			<?php
-			printf(
-				/* translators: Hidden accessibility text. %s: Theme name */
-				__( 'Select %s' ),
-				$theme->display( 'Name' )
-			);
-			?>
-		</label>
+		<label class="screen-reader-text" for="<?php echo $checkbox_id; ?>" ><?php _e( 'Select' ); ?>  <?php echo $theme->display( 'Name' ); ?></label>
 		<?php
 	}
 

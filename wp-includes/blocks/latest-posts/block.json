@@ -84,33 +84,7 @@
 	},
 	"supports": {
 		"align": true,
-		"html": false,
-		"color": {
-			"gradients": true,
-			"link": true,
-			"__experimentalDefaultControls": {
-				"background": true,
-				"text": true,
-				"link": true
-			}
-		},
-		"spacing": {
-			"margin": true,
-			"padding": true
-		},
-		"typography": {
-			"fontSize": true,
-			"lineHeight": true,
-			"__experimentalFontFamily": true,
-			"__experimentalFontWeight": true,
-			"__experimentalFontStyle": true,
-			"__experimentalTextTransform": true,
-			"__experimentalTextDecoration": true,
-			"__experimentalLetterSpacing": true,
-			"__experimentalDefaultControls": {
-				"fontSize": true
-			}
-		}
+		"html": false
 	},
 	"editorStyle": "wp-block-latest-posts-editor",
 	"style": "wp-block-latest-posts"

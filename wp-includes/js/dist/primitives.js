@@ -5,9 +5,9 @@
 /***/ (function(module, exports) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	Copyright (c) 2018 Jed Watson.
-	Licensed under the MIT License (MIT), see
-	http://jedwatson.github.io/classnames
+  Copyright (c) 2018 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
 */
 /* global define */
 
@@ -15,7 +15,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	'use strict';
 
 	var hasOwn = {}.hasOwnProperty;
-	var nativeCodeString = '[native code]';
 
 	function classNames() {
 		var classes = [];
@@ -36,15 +35,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 					}
 				}
 			} else if (argType === 'object') {
-				if (arg.toString !== Object.prototype.toString && !arg.toString.toString().includes('[native code]')) {
-					classes.push(arg.toString());
-					continue;
-				}
-
-				for (var key in arg) {
-					if (hasOwn.call(arg, key) && arg[key]) {
-						classes.push(key);
+				if (arg.toString === Object.prototype.toString) {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
 					}
+				} else {
+					classes.push(arg.toString());
 				}
 			}
 		}
@@ -149,7 +147,6 @@ __webpack_require__.d(__webpack_exports__, {
   "Defs": function() { return /* reexport */ Defs; },
   "G": function() { return /* reexport */ G; },
   "HorizontalRule": function() { return /* reexport */ HorizontalRule; },
-  "Line": function() { return /* reexport */ Line; },
   "LinearGradient": function() { return /* reexport */ LinearGradient; },
   "Path": function() { return /* reexport */ Path; },
   "Polygon": function() { return /* reexport */ Polygon; },
@@ -191,13 +188,6 @@ const Circle = props => (0,external_wp_element_namespaceObject.createElement)('c
  */
 
 const G = props => (0,external_wp_element_namespaceObject.createElement)('g', props);
-/**
- * @param {import('react').ComponentPropsWithoutRef<'line'>} props
- *
- * @return {JSX.Element} Path component
- */
-
-const Line = props => (0,external_wp_element_namespaceObject.createElement)('line', props);
 /**
  * @param {import('react').ComponentPropsWithoutRef<'path'>} props
  *

@@ -180,9 +180,8 @@ class Walker_Nav_Menu_Edit extends Walker_Nav_Menu {
 						printf(
 							'<a class="item-edit" id="edit-%s" href="%s" aria-label="%s"><span class="screen-reader-text">%s</span></a>',
 							$item_id,
-							esc_url( $edit_url ),
+							$edit_url,
 							esc_attr__( 'Edit menu item' ),
-							/* translators: Hidden accessibility text. */
 							__( 'Edit' )
 						);
 						?>
@@ -266,7 +265,7 @@ class Walker_Nav_Menu_Edit extends Walker_Nav_Menu {
 						<p class="link-to-original">
 							<?php
 							/* translators: %s: Link to menu item's original object. */
-							printf( __( 'Original: %s' ), '<a href="' . esc_url( $menu_item->url ) . '">' . esc_html( $original_title ) . '</a>' );
+							printf( __( 'Original: %s' ), '<a href="' . esc_attr( $menu_item->url ) . '">' . esc_html( $original_title ) . '</a>' );
 							?>
 						</p>
 					<?php endif; ?>

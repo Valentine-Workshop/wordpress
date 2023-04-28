@@ -12,7 +12,6 @@
  *
  * @since 4.7.0
  */
-#[AllowDynamicProperties]
 final class WP_Taxonomy {
 	/**
 	 * Taxonomy key.
@@ -277,6 +276,8 @@ final class WP_Taxonomy {
 	 * See the register_taxonomy() function for accepted arguments for `$args`.
 	 *
 	 * @since 4.7.0
+	 *
+	 * @global WP $wp Current WordPress environment instance.
 	 *
 	 * @param string       $taxonomy    Taxonomy key, must not exceed 32 characters.
 	 * @param array|string $object_type Name of the object type for the taxonomy object.

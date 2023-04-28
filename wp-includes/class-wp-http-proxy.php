@@ -39,13 +39,12 @@
  *
  * @since 2.8.0
  */
-#[AllowDynamicProperties]
 class WP_HTTP_Proxy {
 
 	/**
 	 * Whether proxy connection should be used.
 	 *
-	 * Constants which control this behavior:
+	 * Constants which control this behaviour:
 	 *
 	 * - `WP_PROXY_HOST`
 	 * - `WP_PROXY_PORT`
@@ -61,7 +60,7 @@ class WP_HTTP_Proxy {
 	/**
 	 * Whether authentication should be used.
 	 *
-	 * Constants which control this behavior:
+	 * Constants which control this behaviour:
 	 *
 	 * - `WP_PROXY_USERNAME`
 	 * - `WP_PROXY_PASSWORD`
