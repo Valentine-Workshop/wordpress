@@ -58,7 +58,7 @@ $results = $wpdb->get_results($query);
 // Render menu page.
 function custom_admin_plugin_render_menu_page()
 {
-    global $results, $now, $start_date, $end_date, $isToday;
+    global $results, $now, $start_date, $end_date;
 ?>
     <div class="wrap">
         <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
@@ -102,3 +102,4 @@ function custom_admin_plugin_render_menu_page()
     </div>
 <?php
 }
+do_action('custom_admin_plugin_render_menu_page');

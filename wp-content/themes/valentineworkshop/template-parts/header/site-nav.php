@@ -13,10 +13,10 @@
 	<nav id="site-navigation" class="primary-navigation" aria-label="<?php esc_attr_e( 'Primary menu', 'twentytwentyone' ); ?>">
 		<div class="menu-button-container">
 			<button id="primary-mobile-menu" class="button" aria-controls="primary-menu-list" aria-expanded="false">
-				<span class="dropdown-icon open"><?php esc_html_e( 'Menu', 'twentytwentyone' ); ?>
+				<span class="dropdown-icon open"><?php esc_html_e( '', '/' ); ?>
 					<?php echo vw_get_icon_svg( 'ui', 'menu' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 				</span>
-				<span class="dropdown-icon close"><?php esc_html_e( 'Close', 'twentytwentyone' ); ?>
+				<span class="dropdown-icon close"><?php esc_html_e( '', '/' ); ?>
 					<?php echo vw_get_icon_svg( 'ui', 'close' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 				</span>
 			</button><!-- #primary-mobile-menu -->
@@ -24,7 +24,7 @@
 		<?php
 		wp_nav_menu(
 			array(
-				'theme_location'  => 'danger',
+				'theme_location'  => 'primary',
 				'menu_class'      => 'menu-wrapper',
 				'container_class' => 'primary-menu-container',
 				'items_wrap'      => '<ul id="primary-menu-list" class="%2$s">%3$s</ul>',
