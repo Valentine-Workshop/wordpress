@@ -38,6 +38,13 @@ function custom_admin_plugin_menu_page()
         'custom-admin-plugin',
         'custom_admin_plugin_render_menu_page'
     );
+    add_menu_page(
+        'Custom Admin Plugin2',
+        'Custom Admin Plugin2',
+        'manage_options',
+        'custom-admin-plugin2',
+        'get_user_data_details'
+    );
 }
 
 // Get user input.
@@ -102,4 +109,83 @@ function custom_admin_plugin_render_menu_page()
     </div>
 <?php
 }
-do_action('custom_admin_plugin_render_menu_page');
+// do_action('custom_admin_plugin_render_menu_page');
+
+function get_user_data_details_update()
+{
+
+    global $wpdb;
+
+    $test = $wpdb->prefix . 'usermeta';
+
+    $today = date('m-d');
+
+    echo "Today is :: $today";
+    $query = $wpdb->prepare("SELECT * FROM {$wpdb->prefix}usermeta where meta_key LIKE 'user_registration_birthday_field' or meta_key LIKE 'user_registration_phone_number' ");
+
+    $results = $wpdb->get_results($query);
+
+    foreach ($results as $result) {
+        $uid = $result->user_id ?? 0;
+        $metaKey = $result->meta_key ?? '';
+        switch ($metaKey) {
+            case 'user_registration_birthday_field':
+                $get_today_birthday = date('Y-m-d', strtotime($result->meta_value));
+                if (date('m-d', strtotime($get_today_birthday)) == $today) {
+                    echo "<br>USER ID : " . $result->user_id . "<br>Birthday : " . date('Y-m-d', strtotime($get_today_birthday)) . "<br>";
+
+                    $aa = $get_today_birthday;
+                }
+                break;
+            case 'user_registration_phone_number':
+                if ($uid == $get_phone) {
+                    echo "Test : " . $result->meta_value . "<br>";
+
+                    $phoneNumber = $result->meta_value;
+                }
+                break;
+        }
+    }
+
+    echo "<br>Today is the birthday ($aa) of the owner of this phone number : $phoneNumber";
+}
+
+
+function get_user_data_details()
+{
+
+    global $wpdb;
+    $ymd = date('Y-m-d');
+    $md = date('m-d');
+    $query = $wpdb->prepare("SELECT *
+    FROM {$wpdb->prefix}usermeta WHERE meta_key LIKE 'user_registration_birthday_field' AND
+      MONTH(meta_value) = MONTH(%s) AND
+      DAY(meta_value) = DAY(%s)", $ymd, $ymd);
+    $results = $wpdb->get_results($query);
+    echo "<h3>Today birthday ($md)</h3>";
+
+    foreach ($results as $result) {
+        $userBirthday = date('d M Y', strtotime($result->meta_value));
+        $phoneQuery = $wpdb->prepare("SELECT meta_value FROM {$wpdb->prefix}usermeta WHERE meta_key LIKE 'user_registration_phone_number' AND user_id = %s", $uid = $result->user_id);
+        $phone = $wpdb->get_results($phoneQuery)[0]->meta_value ?? false;
+
+        echo "<table>";
+        echo "<thead>";
+        echo "<tr>";
+        echo "<th>User ID</th>";
+        echo "<th>Birthday</th>";
+        echo "<th>Contact</th>";
+        echo "</tr>";
+        echo "</thead>";
+        echo "<tbody>";
+        echo "<tr>";
+        echo "<th>$uid</th>";
+        echo "<th>$userBirthday</th>";
+        echo "<th>" . ($phone ? "<a href=\"tel:$phone\">$phone</a>" : 'Not found') . "</th>";
+        echo "</tr>";
+        echo "</tbody>";
+        echo "</table>";
+    }
+}
+
+do_action('get_user_data_details');
